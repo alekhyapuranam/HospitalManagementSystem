@@ -1,0 +1,13 @@
+{
+    "java.project.sourcePaths": [
+        "src/hospitalmanagementsys",
+        "lib"
+    ],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ],
+    "cSpell.words": [
+        "jdbc"
+    ]
+}
