@@ -96,20 +96,24 @@ public class HospitalManagement {
     
 
     public static void Appointment(Doctor doctor, Patient patient, Connection connection, Scanner scanner) {
-        System.out.println("Enter Doctor ID");
-        int doctorid = scanner.nextInt();
-        System.out.println("Enter Patient ID");
-        int patientid = scanner.nextInt();
+        System.out.println("Enter Doctor Name");
+        String doctorname = scanner.next();
+        System.out.println("Enter Patient Name");
+        String patientname = scanner.next();
         System.out.println("Enter Date to Book Appointment in (yyyy-mm-dd)");
         String date = scanner.next();
+        int doctorid=doctor.getDoctorIdByName(doctorname);
+        int patientid=patient.getPatientIdByName(patientname);
         if (doctor.viewDoctorByID(doctorid) && patient.viewPatientByID(patientid)) {
             if (checkAppointment(connection, doctorid, date)) {
                 try {
-                    String query = "insert into appointment(Patient_ID,Doctor_ID, Appointment_Date) values(?,?,?)";
+                    String query = "insert into appointment(Patient_ID,Doctor_ID, Appointment_Date, Doctor_name, patient_name) values(?,?,?,?,?)";
                     PreparedStatement preparedStatement = connection.prepareStatement(query);
                     preparedStatement.setInt(1, patientid);
                     preparedStatement.setInt(2, doctorid);
                     preparedStatement.setDate(3, Date.valueOf(date));// date.valueOf converts string date to date  datatype 
+                    preparedStatement.setString(4, doctorname);
+                    preparedStatement.setString(5, patientname);
                     int result = preparedStatement.executeUpdate();
                     if (result>0) {
                         System.out.println("Appointment booked successfully");

@@ -108,7 +108,56 @@ public class Patient {
              
 
       }
-     
+
+      public void viewPatientByName(String name){
+        try {
+            String query="select * from patient where Patient_ID=?";
+            PreparedStatement preparedStatement=connection.prepareStatement(query);
+            preparedStatement.setString(1, name);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("Patient_ID");
+                String patientname=resultSet.getString("Name");
+                int age=resultSet.getInt("age");
+                String gender=resultSet.getString("gender");
+
+                System.out.println("id :"+id);
+                System.out.println("name :"+patientname);
+                System.out.println("age : "+age);
+                System.out.println("gender : "+ gender);
+                 
+               
+            }
+               
 
 
+                
+            } catch (SQLException e) {
+            e.printStackTrace();
+          }
+        
+         
+        }
+
+        public int getPatientIdByName(String name){
+            try {
+                String query="select Patient_ID from patient where Name=?";
+                PreparedStatement preparedStatement=connection.prepareStatement(query);
+                preparedStatement.setString(1, name);
+                ResultSet resultSet=preparedStatement.executeQuery();
+                if(resultSet.next())
+                {
+                    return resultSet.getInt("Patient_ID");
+                }
+
+
+            } catch (SQLException e) {
+                // TODO: handle exception
+                e.printStackTrace();
+            }
+
+             return 0;
+            
+
+        }
 }

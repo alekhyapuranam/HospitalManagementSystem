@@ -54,12 +54,12 @@ public class Doctor {
                     System.out.println("Id : "+id);
                     System.out.println("Name : "+name);
                     System.out.println("specialization : "+specialization);
-                    
+                   
                 }              
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
+           
 
            }
            public boolean viewDoctorByID(int id)
@@ -88,6 +88,22 @@ public class Doctor {
 
            }
          
-
+         public int  getDoctorIdByName(String name)
+         { 
+            try {
+                String query="select Doctor_ID from doctor where Name=?";
+                PreparedStatement preparedStatement=connection.prepareStatement(query);
+                preparedStatement.setString(1, name);
+                ResultSet resultSet=preparedStatement.executeQuery();
+                if(resultSet.next())
+                {
+                    return resultSet.getInt("Doctor_ID");
+                }
+                
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+            return 0;
+         }
 
 }
