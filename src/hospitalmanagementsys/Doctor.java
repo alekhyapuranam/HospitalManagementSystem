@@ -1,4 +1,4 @@
-//package hospitalmanagementsys;
+package hospitalmanagementsys;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -98,6 +98,10 @@ public class Doctor {
                 if(resultSet.next())
                 {
                     return resultSet.getInt("Doctor_ID");
+                }
+                else{
+                    System.out.println("Invalid doctor name");
+                    return 0;
                 }
                 
             } catch (Exception e) {

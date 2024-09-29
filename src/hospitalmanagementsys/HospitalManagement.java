@@ -1,4 +1,4 @@
-//package src\hospitalmanagementsys;
+package hospitalmanagementsys;//package src\hospitalmanagementsys;
 //import hospitalmanagementsys.Doctor;
 
 import java.sql.Connection;
@@ -102,8 +102,8 @@ public class HospitalManagement {
         String patientname = scanner.next();
         System.out.println("Enter Date to Book Appointment in (yyyy-mm-dd)");
         String date = scanner.next();
-        int doctorid=doctor.getDoctorIdByName(doctorname);
-        int patientid=patient.getPatientIdByName(patientname);
+        int doctorid=doctor.getDoctorIdByName(doctorname);// to get doctor id bt name to check id is present in the database or not.
+        int patientid=patient.getPatientIdByName(patientname);// to get patient id by name to check id is present in the database or not.
         if (doctor.viewDoctorByID(doctorid) && patient.viewPatientByID(patientid)) {
             if (checkAppointment(connection, doctorid, date)) {
                 try {
